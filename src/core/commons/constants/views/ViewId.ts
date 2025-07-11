@@ -1,0 +1,11 @@
+export enum ViewId {
+  DEFAULT = 'DEFAULT',
+  SECOND = 'SECOND',
+  THIRD = 'THIRD',
+  
+  MAIN_THREE = 'MAIN_THREE',
+
+  THREE_DEMO = 'THREE_DEFAULT',
+  THREE_SECOND = 'THREE_SECOND',
+  DEMO = 'DEMO',
+}

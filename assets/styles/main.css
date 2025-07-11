@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+html, body {
+  font-size: 10px;
+}
+
+@theme { 
+  --color-light-gray: #F8F7F9;
+  --color-nearBlack: #0b0b0b;
+  --color-orange: #FF6F2D;
+}
+
+/* Fonts */
+@theme {
+  --font-sans: Helvetica;
+  /* --font-display: Helvetica; */
+}
+
+/* Spacings */
+@theme {
+  --spacing-*: initial;
+  --spacing: 1px;
+}
+
+/* Font sizes */
+@theme {
+  --text-*: initial;
+  --text-9: 0.9rem;
+  --text-10: 1rem;
+  --text-11: 1.1rem;
+  --text-12: 1.2rem;
+  --text-13: 1.3rem;
+  --text-14: 1.4rem;
+  --text-16: 1.6rem;
+  --text-18: 1.8rem;
+  --text-20: 2rem;
+  --text-22: 2.2rem;
+  --text-24: 2.4rem;
+  --text-28: 2.8rem;
+  --text-30: 3rem;
+  --text-35: 3.5rem;
+  --text-42: 4.2rem;
+}
+

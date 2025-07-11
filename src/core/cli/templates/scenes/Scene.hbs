@@ -1,0 +1,20 @@
+import { Scene } from '@/core/commons/scenes/Scene';
+import { SceneId } from '@/core/commons/constants/scenes/SceneId'
+import { SceneLayer } from '@/core/commons/constants/scenes/SceneLayer'
+import { ViewId } from '@/core/commons/constants/views/ViewId'
+
+export class {{ name }} extends Scene {
+  constructor() {
+    super(SceneId.{{ id }}, SceneLayer.{{ layer }});
+  }
+
+  // #region lifecycle
+  public override init() {
+    super.init();
+  }
+  
+  public override reset() {
+    super.reset();
+  }
+  // #endregion
+}

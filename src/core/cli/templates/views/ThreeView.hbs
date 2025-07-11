@@ -1,0 +1,17 @@
+import { ThreeView } from "@/core/three/views/ThreeView";
+import { ViewLayer } from "@/core/commons/constants/views/ViewLayer";
+import { ViewId } from "@/core/commons/constants/views/ViewId";
+
+export class {{ name }} extends ThreeView {
+  constructor() {
+    super(ViewId.{{ id }}, ViewLayer.{{ layer }});
+  };
+
+  public override init() {
+    super.init();
+  }
+
+  public override reset() {
+    super.reset();
+  }
+}

@@ -1,0 +1,18 @@
+import { CamerasId } from "@/core/three/constants/CamerasId";
+import { OrthographicCameraController } from "@/core/three/controllers/cameras/abstracts/OrthographicCameraController";
+
+export class {{ name }} extends OrthographicCameraController {
+  constructor() {
+    super(CamerasId.{{ id }});
+  }
+
+  // #region lifecycle
+  public override init() {
+    super.init();
+  }
+  
+  public override reset() {
+    super.reset();
+  }
+  // #endregion
+}

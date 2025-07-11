@@ -1,0 +1,29 @@
+import { ThreeScene } from '@/core/three/scenes/ThreeScene';
+import { SceneId } from '@/core/commons/constants/scenes/SceneId';
+import { SceneLayer } from '@/core/commons/constants/scenes/SceneLayer';
+import { AssetsId } from '@/core/commons/constants/AssetsId';
+import { CamerasId } from '@/core/three/constants/CamerasId';
+import { ViewId } from '@/core/commons/constants/views/ViewId';
+
+export class {{ name }} extends ThreeScene {
+  constructor() {
+    super(
+      SceneId.{{ id }}, 
+      SceneLayer.{{ layer }}, 
+      {
+        hdr: AssetsId.{{ hdr }},
+        camera: CamerasId.{{ camera }}
+      }
+    );
+  }
+
+  // #region lifecycle
+  public override init() {
+    super.init()
+  }
+
+  public override reset() {
+    super.reset()
+  }
+  // #endregion
+}

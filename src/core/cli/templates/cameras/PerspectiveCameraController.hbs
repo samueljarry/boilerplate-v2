@@ -1,0 +1,18 @@
+import { CamerasId } from "@/core/three/constants/CamerasId";
+import { PerspectiveCameraController } from "@/core/three/controllers/cameras/abstracts/PerspectiveCameraController";
+
+export class {{ name }} extends PerspectiveCameraController {
+  constructor() {
+    super(CamerasId.{{ id }});
+  }
+
+  // #region lifecycle
+  public override init() {
+    super.init();
+  }
+  
+  public override reset() {
+    super.reset();
+  }
+  // #endregion
+}
