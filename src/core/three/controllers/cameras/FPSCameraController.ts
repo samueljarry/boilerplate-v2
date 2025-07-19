@@ -73,10 +73,12 @@ export class FPSCameraController extends KeyboardCameraController {
     // Pan
     this._addControl(Controls.PAN_RIGHT, {
       keys: [KeyCode.ArrowRight, KeyCode.D],
+      shift: true,
     });
 
     this._addControl(Controls.PAN_LEFT, {
       keys: [KeyCode.ArrowLeft, KeyCode.A],
+      shift: true,
     });
 
     // Pedestal
@@ -92,12 +94,10 @@ export class FPSCameraController extends KeyboardCameraController {
     // Truck
     this._addControl(Controls.TRUCK_RIGHT, {
       keys: [KeyCode.D, KeyCode.ArrowRight],
-      shift: true,
     });
 
     this._addControl(Controls.TRUCK_LEFT, {
       keys: [KeyCode.A, KeyCode.ArrowLeft],
-      shift: true,
     });
 
     // Tilt
