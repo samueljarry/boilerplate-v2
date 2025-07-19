@@ -4,42 +4,40 @@ import tsConfigPaths from 'vite-tsconfig-paths';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  modules: ["@nuxt/eslint"],
+  devtools: { enabled: true },
+  css: ["~/assets/styles/main.css"],
+  compatibilityDate: "2025-05-15",
 
-	modules: ['@nuxt/eslint'],
-	devtools: { enabled: true },
-	css: ['~/assets/styles/main.css'],
-	compatibilityDate: '2025-05-15',
+  vite: {
+    plugins: [
+      tailwindcss(),
+      tsConfigPaths(),
+      {
+        name: "force-full-reload",
+        handleHotUpdate(ctx) {
+          if (ctx.file.endsWith(".ts")) {
+            ctx.server.ws.send({
+              type: "full-reload",
+              path: "src/*",
+            });
+          }
+        },
+      },
+    ],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+  },
 
-	vite: {
-		plugins: [
-			tailwindcss(),
-			tsConfigPaths(),
-			{
-				name: 'force-full-reload',
-
-				handleHotUpdate({ file, server }) {
-					if (file.endsWith('.ts')) {
-						server.ws.send({
-							type: 'full-reload',
-							path: 'src/*',
-						});
-					}
-				},
-			},
-		],
-		resolve: {
-			alias: {
-				'@': path.resolve(__dirname, './src'),
-			},
-		},
-	},
-
-	eslint: {
-		config: {
-			stylistic: {
-				indent: 'tab',
-				semi: true,
-			},
-		},
-	},
+  eslint: {
+    config: {
+      stylistic: {
+        indent: "tab",
+        semi: true,
+      },
+    },
+  },
 });

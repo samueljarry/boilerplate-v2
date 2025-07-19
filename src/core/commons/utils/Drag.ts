@@ -1,9 +1,14 @@
+type ElementToGrab = HTMLElement | Window;
+
 export class Drag {
   private _enabled = false;
   private _dragging = false;
+  private _elementToGrab: ElementToGrab;
   private _onDrag: (event: PointerEvent) => void;
 
-  constructor() {}
+  constructor(elementToGrab: ElementToGrab = window) {
+    this._elementToGrab = elementToGrab;
+  }
 
   // #region lifecycle
   public start(): void {
@@ -17,11 +22,11 @@ export class Drag {
   }
 
   private _addListeners(): void {
-    window.addEventListener("pointerdown", this._startDrag);
+    this._elementToGrab.addEventListener("pointerdown", this._startDrag);
   }
 
   private _removeListeners(): void {
-    window.removeEventListener("pointerdown", this._startDrag);
+    this._elementToGrab.removeEventListener("pointerdown", this._startDrag);
     this._stopDrag();
   }
   // #endregion
@@ -54,6 +59,8 @@ export class Drag {
     return this._dragging;
   }
 
-  public set onDrag(func: (event: PointerEvent) => void) { this._onDrag = func; }
+  public set onDrag(func: (event: PointerEvent) => void) {
+    this._onDrag = func;
+  }
   // #endregion
 }
