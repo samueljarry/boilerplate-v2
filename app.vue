@@ -1,6 +1,5 @@
 <template>
-	<Body class="bg-light-gray" />
-	<ClientOnly>
-		<Views />
-	</ClientOnly>
+	<NuxtLayout>
+		<NuxtPage />
+	</NuxtLayout>
 </template>

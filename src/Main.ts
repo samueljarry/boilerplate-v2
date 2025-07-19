@@ -1,13 +1,13 @@
-import { Action } from "@/core/commons/utils/Action";
 import { CoreInitCommand } from "@/core/commons/commands/CoreInitCommand";
 import { GlobalInitCommand } from "@/commands/inits/GlobalInitCommand";
-import { SceneId } from "@/core/commons/constants/scenes/SceneId";
-import { ScenesManager } from "@/core/commons/managers/ScenesManager";
+import { SingleUseAction } from "@/core/commons/utils/SingleUseAction";
 import { Ticker } from "@/core/commons/utils/Ticker";
 
 export class Main {
-  public static _IsInit = false;
-  public static OnInit = new Action();
+  private static _Started = false;
+  private static _Initialized = false;
+  public static OnStart = new SingleUseAction();
+  public static OnAfterInit = new SingleUseAction();
   public static readonly Inits = [
     CoreInitCommand,
     GlobalInitCommand,
@@ -16,8 +16,8 @@ export class Main {
   public static async Init() {
     await this._LoadInitCommands();
 
-    this._IsInit = true;
-    this.OnInit.execute();
+    this._Initialized = true;
+    this.OnAfterInit.execute();
   }
 
   private static async _LoadInitCommands() {
@@ -30,11 +30,13 @@ export class Main {
   }
 
   public static Start() {
-    ScenesManager.Show(SceneId.DEFAULT);
-
+    this._Started = true;
     Ticker.EnableStats();
     Ticker.Start();
-  }
 
-  public static get IsInit() { return this._IsInit; }
+    this.OnStart.execute();
+  }
+  
+  public static get Initialized() { return this._Initialized; }
+  public static get Started() { return this._Started; }
 }

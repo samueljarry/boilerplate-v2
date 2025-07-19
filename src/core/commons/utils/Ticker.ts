@@ -1,16 +1,16 @@
-import { Timer, createTimer } from 'animejs';
+import { Timer, createTimer } from "animejs";
 
-import { Action } from './Action';
-import Stats from 'three/examples/jsm/libs/stats.module.js';
-import { clamp } from './clamp';
+import { Action } from "./Action";
+import Stats from "three/examples/jsm/libs/stats.module.js";
+import { clamp } from "./clamp";
 
-type UpdateFuncParams = [number, number]
+type UpdateFuncParams = [number, number];
 type UpdateFunc = (...params: UpdateFuncParams) => void;
 
 export class Ticker {
   public static readonly FRAMERATE = 120;
   private static _OnUpdate = new Action<UpdateFuncParams>();
-  private static _Stats = new Stats();
+  private static _Stats: Stats;
   private static _StatsEnabled = false;
   private static _ElapsedTime = 0;
 
@@ -25,6 +25,10 @@ export class Ticker {
   }
 
   public static EnableStats() {
+    if (!this._Stats) {
+      this._Stats = new Stats();
+    }
+
     document.body.appendChild(this._Stats.dom);
     this._StatsEnabled = true;
   }
@@ -50,5 +54,7 @@ export class Ticker {
     if (this._StatsEnabled) this._Stats.update();
   };
 
-  public static get ElapsedTime() { return this._ElapsedTime; }
+  public static get ElapsedTime() {
+    return this._ElapsedTime;
+  }
 }

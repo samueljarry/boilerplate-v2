@@ -10,7 +10,7 @@
     views.value = Array.from(ViewsManager.DisplayedVueViews)
   }
 
-  const onInit = () => {
+  const onAfterInit = () => {
     loading.value = false;
     
     Main.Start();
@@ -19,13 +19,13 @@
   onMounted(() => {
     Main.Init()
     
-    Main.OnInit.add(onInit);
+    Main.OnAfterInit.add(onAfterInit);
     ViewsManager.OnViewsChange.add(setDisplayedViews);
   });
 
   onUnmounted(() => {
     ViewsManager.OnViewsChange.remove(setDisplayedViews);
-    Main.OnInit.remove(onInit);
+    Main.OnAfterInit.remove(onAfterInit);
   });
 </script>
 
