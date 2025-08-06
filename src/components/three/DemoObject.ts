@@ -1,9 +1,7 @@
-import { AssetsId } from "@/core/commons/constants/AssetsId";
 import { Ticker } from "@/core/commons/utils/Ticker";
 import { ExtendedObject3D } from "@/core/three/components/ExtendedObject3D";
-import { ThreeAssetsManager } from "@/core/three/managers/ThreeAssetsManager";
 import { createTimeline } from "animejs";
-import { DodecahedronGeometry, DoubleSide, Mesh, MeshPhysicalMaterial, RepeatWrapping, Vector2 } from 'three';
+import { DodecahedronGeometry, DoubleSide, Mesh, MeshPhysicalMaterial } from 'three';
 
 export class DemoObject extends ExtendedObject3D {
   private _mesh: Mesh<DodecahedronGeometry, MeshPhysicalMaterial>;
