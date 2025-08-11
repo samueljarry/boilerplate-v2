@@ -1,16 +1,16 @@
-import { Scene, Vector2, WebGLRenderer } from "three";
+import { ACESFilmicToneMapping, NoToneMapping, Scene, Vector2, WebGLRenderer } from "three";
 
 import type { AbstractCameraController } from "./controllers/cameras/abstracts/AbstractCameraController";
 import { Action } from "../commons/utils/Action";
 import type { AssetsId } from "../commons/constants/AssetsId";
 import { CamerasManager } from "./managers/CamerasManager";
 import { Modules } from "@/Modules";
+import { PostProcessingManager } from "./postprocessing/managers/PostProcessingManager";
 import { ThreeAssetsManager } from "./managers/ThreeAssetsManager";
 import { ThreeView } from "./views/ThreeView";
 import { Ticker } from "../commons/utils/Ticker";
 import { ViewId } from "../commons/constants/views/ViewId";
 import { ViewsManager } from "../commons/managers/ViewsManager";
-import { debounce } from "../commons/utils/debounce";
 
 export class Three {
   private static _Renderer: WebGLRenderer;
@@ -26,7 +26,7 @@ export class Three {
   public static Init(): void {
     this._CheckModule();
 
-    this._Viewport.set(window.innerWidth, window.innerHeight)
+    this._Viewport.set(window.innerWidth, window.innerHeight);
     CamerasManager.OnCameraChange.add(this._HandleCameraChange);
     CamerasManager.OnFirstCameraSet.add(this._CheckRequirementBeforeStart);
 
@@ -57,6 +57,7 @@ export class Three {
       powerPreference: "high-performance",
     });
 
+    this._Renderer.toneMapping = ACESFilmicToneMapping;
     this._Renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
     this._Renderer.setSize(window.innerWidth, window.innerHeight);
   }
@@ -79,7 +80,9 @@ export class Three {
     }
   }
 
-  private static _HandleCameraChange = (controller: AbstractCameraController): void => {
+  private static _HandleCameraChange = (
+    controller: AbstractCameraController
+  ): void => {
     this._Scene.remove(this._CameraController);
     this._CameraController = controller;
     this._Scene.add(this._CameraController);
@@ -127,7 +130,7 @@ export class Three {
     this._Viewport.set(window.innerWidth, window.innerHeight);
     this._Renderer.setSize(window.innerWidth, window.innerHeight);
 
-    this.OnResize.execute()
+    this.OnResize.execute();
   };
   // #endregion
 
@@ -135,38 +138,38 @@ export class Three {
   private static _Update = (dt: number): void => {
     this._CheckResizeRequirement();
     this._CameraController.update(dt);
-    this._Render();
+    this._Render(dt);
   };
 
   private static _CheckResizeRequirement(): void {
     const notSameWidth = this._Viewport.x !== window.innerWidth;
     const notSameHeight = this._Viewport.y !== window.innerHeight;
 
-    const needsResize = notSameWidth || notSameHeight;
+    const needsResize = notSameWidth || notSameHeight;
 
-    
-    if(needsResize) {
-      console.log('resize')
-      this._Resize()
+    if (needsResize) {
+      this._Resize();
     }
   }
 
-  private static _Render = (): void => {
-    this._Renderer.render(this._Scene, this._CameraController.camera);
+  private static _Render = (dt: number): void => {
+    if(PostProcessingManager.Enabled) {
+      PostProcessingManager.Composer.render(dt);
+    } else {
+      this._Renderer.render(this._Scene, this._CameraController.camera);
+    }
   };
   // #endregion
   // #endregion
 
   // #region getters / setters
-  public static get Canvas() {
-    return this._Canvas;
-  }
-  public static get Scene() {
-    return this._Scene;
-  }
+  public static get Canvas() { return this._Canvas; }
+  public static get Scene() { return this._Scene; }
+  public static get Camera() { return this._CameraController.camera; }
+  public static get Renderer() { return this._Renderer; }
 
   public static set Canvas(canvas: HTMLCanvasElement) {
-    if(this._Canvas) return;
+    if (this._Canvas) return;
 
     this._Canvas = canvas;
     this._CreateRenderer();

@@ -45,6 +45,10 @@ export class Ticker {
     this._OnUpdate.remove(func);
   }
 
+  public static Has(func: UpdateFunc) {
+    return this._OnUpdate.actionSet.has(func);
+  }
+
   private static _Render = ({ deltaTime, currentTime }: Timer): void => {
     const dt = clamp(deltaTime / 1000);
     this._ElapsedTime = currentTime / 1000;

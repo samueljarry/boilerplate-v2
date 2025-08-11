@@ -21,25 +21,3 @@ export const areQuaternionAligned = (
 
   return angleDiff < threshold;
 };
-
-export const splineBetweenCameras = (
-  cameraToMove: Camera,
-  startCamera: PerspectiveCamera,
-  inBetweenCamera: Camera,
-  endCamera: Camera,
-  t: number
-): void => {
-  const pos1 = startCamera.position.lerp(inBetweenCamera.position, t);
-  const pos2 = inBetweenCamera.position.lerp(endCamera.position, t);
-
-  const rot1 = startCamera.quaternion.slerp(inBetweenCamera.quaternion, t);
-  const rot2 = inBetweenCamera.quaternion.slerp(endCamera.quaternion, t);
-
-  rot1.normalize();
-  rot2.normalize();
-
-  cameraToMove.position.lerpVectors(pos1, pos2, t);
-  cameraToMove.quaternion.slerpQuaternions(rot1, rot2, t);
-
-  cameraToMove.quaternion.normalize();
-};

@@ -12,8 +12,15 @@ import { ThreeAssetsManager } from "@/core/three/managers/ThreeAssetsManager";
 import { AssetsId } from "../constants/AssetsId";
 import { OrbitCameraController } from "@/core/three/controllers/cameras/OrbitCameraController";
 import { FPSCameraController } from "@/core/three/controllers/cameras/FPSCameraController";
+import { ShaderChunkCommand } from "@/core/three/commands/ShaderChunkCommand";
 
 export class CoreInitCommand extends InitCommand {
+  public override async initBefore() {
+    if (Modules.THREE) {
+      ShaderChunkCommand.Extend();
+    }
+  }
+
   public override async initManagers(): Promise<void> {
     if(Modules.THREE) {
       CamerasManager.Init();

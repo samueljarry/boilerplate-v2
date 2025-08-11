@@ -1,4 +1,3 @@
-import { AssetsId } from "@/core/commons/constants/AssetsId";
 import { ThreeAssetsType } from "../constants/ThreeAssetsType";
 import type { CubeTexture, Texture } from "three";
 import type { DataTexture } from "three";
@@ -24,37 +23,41 @@ const createQueuedAssetObject = (
 });
 
 export class ThreeAssetsManager {
-  public static OnLoad = new Action<[AssetsId, unknown]>();
+  public static OnLoad = new Action<[AssetId, unknown]>();
 
-  private static _Queue = new Map<AssetsId, ThreeQueuedAsset>();
-  private static _TexturesMap = new Map<AssetsId, Texture>();
-  private static _ModelsMap = new Map<AssetsId, GLB>();
-  private static _HdrMap = new Map<AssetsId, DataTexture>();
-  private static _CubeTexturesMap = new Map<AssetsId, CubeTexture>();
+  private static _Queue = new Map<AssetId, ThreeQueuedAsset>();
+  private static _TexturesMap = new Map<AssetId, Texture>();
+  private static _ModelsMap = new Map<AssetId, GLB>();
+  private static _HdrMap = new Map<AssetId, DataTexture>();
+  private static _CubeTexturesMap = new Map<AssetId, CubeTexture>();
 
   // #region utilities
   // #region Queue Assets
-  private static _AddToQueue(id: AssetsId, path: string, type: ThreeAssetsType) {
+  private static _AddToQueue(
+    id: AssetId,
+    path: string,
+    type: ThreeAssetsType
+  ) {
     this._Queue.set(id, createQueuedAssetObject(this._GetPath(path), type));
   }
 
-  public static AddTexture(id: AssetsId, path: string): void {
+  public static AddTexture(id: AssetId, path: string): void {
     this._AddToQueue(id, path, ThreeAssetsType.TEXTURE);
   }
 
-  public static AddGlb(id: AssetsId, path: string): void {
+  public static AddGlb(id: AssetId, path: string): void {
     this._AddToQueue(id, path, ThreeAssetsType.GLB);
   }
 
-  public static AddPly(id: AssetsId, path: string): void {
+  public static AddPly(id: AssetId, path: string): void {
     this._AddToQueue(id, path, ThreeAssetsType.PLY);
   }
 
-  public static AddHdr(id: AssetsId, path: string): void {
+  public static AddHdr(id: AssetId, path: string): void {
     this._AddToQueue(id, path, ThreeAssetsType.HDR);
   }
 
-  public static AddCubeTexture(id: AssetsId, path: string): void {
+  public static AddCubeTexture(id: AssetId, path: string): void {
     this._AddToQueue(id, path, ThreeAssetsType.CUBEMAP);
   }
   // #endregion
@@ -95,7 +98,7 @@ export class ThreeAssetsManager {
     await Promise.all(promises);
   }
 
-  private static _Retrieve<T>(map: Map<AssetsId, T>, id: AssetsId): T {
+  private static _Retrieve<T>(map: Map<AssetId, T>, id: AssetId): T {
     return getOrThrowError(
       map,
       id,
@@ -108,24 +111,24 @@ export class ThreeAssetsManager {
   }
 
   private static _GetPath(path: string) {
-    return '/' + path;
+    return "/" + path;
   }
   // #endregion
 
   // #region getters / setters
-  public static GetTexture(id: AssetsId) {
+  public static GetTexture(id: AssetId) {
     return this._Retrieve(this._TexturesMap, id);
   }
 
-  public static GetModel(id: AssetsId) {
+  public static GetModel(id: AssetId) {
     return this._Retrieve(this._ModelsMap, id);
   }
 
-  public static GetCubeTexture(id: AssetsId) {
+  public static GetCubeTexture(id: AssetId) {
     return this._Retrieve(this._CubeTexturesMap, id);
   }
 
-  public static GetHdr(id: AssetsId) {
+  public static GetHdr(id: AssetId) {
     return this._Retrieve(this._HdrMap, id);
   }
 

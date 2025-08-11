@@ -1,6 +1,6 @@
 export class VideoLoader {
   public static async Load(path: string) {
-    return new Promise((resolve, reject) => {
+    return new Promise<HTMLVideoElement>((resolve, reject) => {
       const video = document.createElement("video");
 
       video.addEventListener("loadeddata", () => {

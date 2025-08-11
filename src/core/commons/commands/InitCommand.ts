@@ -1,3 +1,4 @@
+import { CommonAssetsManager } from "../managers/CommonAssetsManager";
 import { Modules } from "@/Modules";
 // import { CommonAssetsManager } from "../../managers/CommonAssetsManager";
 import { ThreeAssetsManager } from "@/core/three/managers/ThreeAssetsManager";
@@ -53,7 +54,7 @@ export class InitCommand {
    * Load all assets added to queue
    */
   public async loadAssets(): Promise<void> {
-    // await CommonAssetsManager.Load();
+    await CommonAssetsManager.Load();
 
     if(Modules.THREE) {
       await ThreeAssetsManager.Load();

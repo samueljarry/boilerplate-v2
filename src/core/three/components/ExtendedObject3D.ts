@@ -1,8 +1,20 @@
 import { Object3D } from "three";
+import type { ExtendedObject3DId } from "../constants/ExtendedObject3DId";
+import { ExtendedObject3DProxy } from "../proxies/ExtendedObject3DProxy";
 
 export class ExtendedObject3D extends Object3D {
   public isExtendedObject3D = true;
   protected _extendedObject3Ds = new Set<ExtendedObject3D>();
+
+  constructor(
+    public readonly extendedObject3dId?: ExtendedObject3DId
+  ) {
+    super();
+
+    if(this.extendedObject3dId) {
+      ExtendedObject3DProxy.Add(this.extendedObject3dId, this);
+    }
+  }
 
   public init() {
     if (this.resize) {

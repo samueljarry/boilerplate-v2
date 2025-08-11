@@ -8,6 +8,7 @@ export class SingleUseAction extends Action<Array<unknown>> {
     this._used = true;
 
     super.execute(...params);
+    this.clear();
   }
 
   public reset(): void {

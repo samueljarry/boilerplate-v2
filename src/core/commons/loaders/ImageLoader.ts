@@ -1,6 +1,6 @@
 export class ImageLoader {
   public static async Load(path: string) {
-    return new Promise((resolve, reject) => {
+    return new Promise<HTMLImageElement>((resolve, reject) => {
       const image = new Image();
 
       image.addEventListener("load", () => {

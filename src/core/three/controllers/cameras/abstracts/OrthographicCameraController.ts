@@ -3,8 +3,8 @@ import type { CamerasId } from "../../../constants/CamerasId";
 import { AbstractCameraController } from "./AbstractCameraController";
 
 export abstract class OrthographicCameraController extends AbstractCameraController {
-  declare protected _camera: OrthographicCamera;
-  
+  protected declare _camera: OrthographicCamera;
+
   constructor(id: CamerasId) {
     super(id);
   }
@@ -19,4 +19,8 @@ export abstract class OrthographicCameraController extends AbstractCameraControl
 
     this._camera.updateProjectionMatrix();
   };
+
+  public override get camera() {
+    return this._camera;
+  }
 }

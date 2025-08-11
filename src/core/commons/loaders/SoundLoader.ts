@@ -1,6 +1,6 @@
 export class SoundLoader {
   public static async Load(path: string) {
-    return new Promise((resolve, reject) => {
+    return new Promise<HTMLAudioElement>((resolve, reject) => {
       const audio = new Audio();
 
       audio.addEventListener("canplaythrough", () => {

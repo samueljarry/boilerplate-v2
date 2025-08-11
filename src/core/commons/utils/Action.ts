@@ -1,15 +1,24 @@
-export class Action<T extends Array<unknown>> {
-  public actionSet = new Set<(...params: T) => void>();
-  private _callbacks: Array<(...params: T) => void> = [] as const;
+type ActionFunc<T extends Array<unknown>> = (...params: T) => void;
 
-  public add(func: (...params: T) => void) {
+export class Action<T extends Array<unknown>> {
+  public actionSet = new Set<ActionFunc<T>>();
+  private _orderMap = new Map<ActionFunc<T>, number>();
+  private _callbacks: Array<ActionFunc<T>> = [] as const;
+
+  public add(func: ActionFunc<T>, order = 1) {
     this.actionSet.add(func);
-    this._callbacks = Array.from(this.actionSet);
+    this._orderMap.set(func, order);
+    this._callbacks = Array.from(this.actionSet).sort(
+      (a, b) => (this._orderMap.get(a) ?? 0) - (this._orderMap.get(b) ?? 0)
+    );
   }
 
-  public remove(func: (...params: T) => void) {
+  public remove(func: ActionFunc<T>) {
     this.actionSet.delete(func);
-    this._callbacks = Array.from(this.actionSet);
+    this._orderMap.delete(func);
+    this._callbacks = Array.from(this.actionSet).sort(
+      (a, b) => (this._orderMap.get(a) ?? 0) - (this._orderMap.get(b) ?? 0)
+    );
   }
 
   public clear(): void {
@@ -19,7 +28,7 @@ export class Action<T extends Array<unknown>> {
   }
 
   public execute(...params: T) {
-    for (const func of this.actionSet.values()) {
+    for (const func of this._callbacks) {
       func(...params);
     }
   }

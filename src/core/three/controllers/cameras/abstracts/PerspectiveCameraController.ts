@@ -17,4 +17,8 @@ export class PerspectiveCameraController extends AbstractCameraController {
     this._camera.aspect = this.aspect;
     this._camera.updateProjectionMatrix();
   };
+
+  public override get camera() {
+    return this._camera;
+  }
 }
