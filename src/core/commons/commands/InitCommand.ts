@@ -1,7 +1,6 @@
-import { CommonAssetsManager } from "../managers/CommonAssetsManager";
-import { Modules } from "@/Modules";
-// import { CommonAssetsManager } from "../../managers/CommonAssetsManager";
 import { ThreeAssetsManager } from "@/core/three/managers/ThreeAssetsManager";
+import { Modules } from "@/Main";
+import { CommonAssetsManager } from "../managers/CommonAssetsManager";
 
 export class InitCommand {
   public async init(): Promise<void> {

@@ -1,16 +1,16 @@
-import { ACESFilmicToneMapping, NoToneMapping, Scene, Vector2, WebGLRenderer } from "three";
+import { ACESFilmicToneMapping, Scene, Vector2, WebGLRenderer } from "three";
 
-import type { AbstractCameraController } from "./controllers/cameras/abstracts/AbstractCameraController";
-import { Action } from "../commons/utils/Action";
+import { Modules } from "@/Main";
 import type { AssetsId } from "../commons/constants/AssetsId";
-import { CamerasManager } from "./managers/CamerasManager";
-import { Modules } from "@/Modules";
-import { PostProcessingManager } from "./postprocessing/managers/PostProcessingManager";
-import { ThreeAssetsManager } from "./managers/ThreeAssetsManager";
-import { ThreeView } from "./views/ThreeView";
-import { Ticker } from "../commons/utils/Ticker";
 import { ViewId } from "../commons/constants/views/ViewId";
 import { ViewsManager } from "../commons/managers/ViewsManager";
+import { Action } from "../commons/utils/Action";
+import { Ticker } from "../commons/utils/Ticker";
+import type { AbstractCameraController } from "./controllers/cameras/abstracts/AbstractCameraController";
+import { CamerasManager } from "./managers/CamerasManager";
+import { ThreeAssetsManager } from "./managers/ThreeAssetsManager";
+import { PostProcessingManager } from "./postprocessing/managers/PostProcessingManager";
+import { ThreeView } from "./views/ThreeView";
 
 export class Three {
   private static _Renderer: WebGLRenderer;
@@ -75,7 +75,7 @@ export class Three {
 
     if (disabled) {
       throw new Error(
-        "Three initialization aborted: please, enable THREE module in Modules.ts"
+        "Three initialization aborted: please, enable THREE module in Main.ts"
       );
     }
   }

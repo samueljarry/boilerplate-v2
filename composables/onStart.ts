@@ -1,6 +1,6 @@
 import { Main } from "@/Main";
 
-export const useMainStart = (callback: () => void) => {
+export const onStart = (callback: () => void) => {
   onMounted(() => {
     Main.OnStart.add(callback);
 

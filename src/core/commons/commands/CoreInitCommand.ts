@@ -1,18 +1,18 @@
+import { DefaultCameraController } from "@/controllers/cameras/DefaultCameraController";
+import { ShaderChunkCommand } from "@/core/three/commands/ShaderChunkCommand";
+import { CamerasId } from "@/core/three/constants/CamerasId";
+import { FPSCameraController } from "@/core/three/controllers/cameras/FPSCameraController";
+import { OrbitCameraController } from "@/core/three/controllers/cameras/OrbitCameraController";
+import { CamerasManager } from "@/core/three/managers/CamerasManager";
+import { ThreeAssetsManager } from "@/core/three/managers/ThreeAssetsManager";
+import { Three } from "@/core/three/Three";
 import MainThreeView from "@/core/three/views/MainThreeView.vue";
+import { Modules } from "@/Main";
+import { AssetsId } from "../constants/AssetsId";
 import { ViewId } from "../constants/views/ViewId";
+import { ViewLayer } from "../constants/views/ViewLayer";
 import { ViewsManager } from "../managers/ViewsManager";
 import { InitCommand } from "./InitCommand";
-import { ViewLayer } from "../constants/views/ViewLayer";
-import { Modules } from "@/Modules";
-import { CamerasManager } from "@/core/three/managers/CamerasManager";
-import { Three } from "@/core/three/Three";
-import { DefaultCameraController } from "@/controllers/cameras/DefaultCameraController";
-import { CamerasId } from "@/core/three/constants/CamerasId";
-import { ThreeAssetsManager } from "@/core/three/managers/ThreeAssetsManager";
-import { AssetsId } from "../constants/AssetsId";
-import { OrbitCameraController } from "@/core/three/controllers/cameras/OrbitCameraController";
-import { FPSCameraController } from "@/core/three/controllers/cameras/FPSCameraController";
-import { ShaderChunkCommand } from "@/core/three/commands/ShaderChunkCommand";
 
 export class CoreInitCommand extends InitCommand {
   public override async initBefore() {

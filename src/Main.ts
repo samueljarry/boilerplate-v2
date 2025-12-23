@@ -1,7 +1,12 @@
-import { CoreInitCommand } from "@/core/commons/commands/CoreInitCommand";
 import { GlobalInitCommand } from "@/commands/inits/GlobalInitCommand";
+import { CoreInitCommand } from "@/core/commons/commands/CoreInitCommand";
 import { SingleUseAction } from "@/core/commons/utils/SingleUseAction";
 import { Ticker } from "@/core/commons/utils/Ticker";
+
+export type Modules = typeof Modules;
+export const Modules = {
+  THREE: true,
+} as const;
 
 export class Main {
   private static _Started = false;
