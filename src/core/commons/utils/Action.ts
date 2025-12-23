@@ -41,6 +41,8 @@ export class Action<T extends Array<unknown>> {
       return;
     }
 
+    this._consumed = true;
+
     for (const func of this._callbacks) {
       func(...params);
     }
