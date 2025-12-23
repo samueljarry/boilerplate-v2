@@ -1,7 +1,7 @@
 import { GlobalInitCommand } from "@/commands/inits/GlobalInitCommand";
 import { CoreInitCommand } from "@/core/commons/commands/CoreInitCommand";
-import { SingleUseAction } from "@/core/commons/utils/SingleUseAction";
 import { Ticker } from "@/core/commons/utils/Ticker";
+import { Action } from "./core/commons/utils/Action";
 
 export type Modules = typeof Modules;
 export const Modules = {
@@ -11,8 +11,9 @@ export const Modules = {
 export class Main {
   private static _Started = false;
   private static _Initialized = false;
-  public static OnStart = new SingleUseAction();
-  public static OnAfterInit = new SingleUseAction();
+  public static OnStart = new Action({ singleUse: true });
+  public static OnAfterInit = new Action({ singleUse: true });
+
   public static readonly Inits = [
     CoreInitCommand,
     GlobalInitCommand,

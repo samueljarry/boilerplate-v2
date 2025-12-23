@@ -1,8 +1,7 @@
-import type { AbstractCameraController } from "../controllers/cameras/abstracts/AbstractCameraController";
 import { Action } from "@/core/commons/utils/Action";
-import { CamerasId } from "../constants/CamerasId";
-import { SingleUseAction } from "@/core/commons/utils/SingleUseAction";
 import { getOrThrowError } from "@/core/commons/utils/getOrThrow";
+import { CamerasId } from "../constants/CamerasId";
+import type { AbstractCameraController } from "../controllers/cameras/abstracts/AbstractCameraController";
 
 export class CamerasManager {
   private static readonly DEBUG_CAMERA = [CamerasId.FPS, CamerasId.ORBIT];
@@ -11,7 +10,7 @@ export class CamerasManager {
   private static _PreviousController: AbstractCameraController;
 
   public static OnCameraChange = new Action<[AbstractCameraController]>();
-  public static OnFirstCameraSet = new SingleUseAction();
+  public static OnFirstCameraSet = new Action({ singleUse: true });
 
   // #region lifecycle
   public static Init(): void {

@@ -1,7 +1,7 @@
 import { Timer, createTimer } from "animejs";
 
-import { Action } from "./Action";
 import Stats from "three/examples/jsm/libs/stats.module.js";
+import { Action } from "./Action";
 import { clamp } from "./clamp";
 
 type UpdateFuncParams = [number, number];
@@ -46,7 +46,7 @@ export class Ticker {
   }
 
   public static Has(func: UpdateFunc) {
-    return this._OnUpdate.actionSet.has(func);
+    return this._OnUpdate._callbacks.has(func);
   }
 
   private static _Render = ({ deltaTime, currentTime }: Timer): void => {
